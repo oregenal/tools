@@ -1,3 +1,11 @@
+; Small utility witch switching input text between RU to ENG keyboard layouts.
+; It's strait forward translate from one to another, depend on input char.
+; There is no any smart charset detection implemented.
+;
+; To compile: csc -static assli.scm
+; 
+; Maked as fun project on scheme language.
+
 (import utf8)
 
 (define qwerty '(#\q #\w #\e #\r #\t #\y #\u #\i #\o #\p #\[ #\] #\a #\s #\d #\f #\g #\h #\j #\k #\l #\; #\' #\z #\x #\c #\v #\b #\n #\m #\, #\. #\/))
