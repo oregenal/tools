@@ -19,6 +19,18 @@ size_t array_size(int *arr)
 	return ((header_t*)arr - 1)->size;
 }
 
+void arr_remove(int *arr, int var)
+{
+	size_t size = array_size(arr);
+	for (size_t i = 0; i < size; ++i) {
+		if (arr[i] == var) {
+			arr[i] = arr[size - 1];
+			((header_t*)arr - 1)->size = size - 1;
+			break;
+		}
+	}
+}
+
 void arr_append(int *arr, int var)
 {
 	header_t *header = (header_t*)arr - 1;
@@ -45,6 +57,13 @@ int main(void)
 	for (size_t i = 0; i < 38; ++i) {
 		arr_append(arr, i);
 	}
+
+	for (size_t i = 0; i < array_size(arr); ++i) {
+		printf("%d\t", arr[i]);
+	}
+	printf("\n");
+	
+	arr_remove(arr, 33);
 
 	for (size_t i = 0; i < array_size(arr); ++i) {
 		printf("%d\t", arr[i]);
