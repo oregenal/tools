@@ -1,27 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define DEF_ARR_CAPACITY 16
+
 typedef struct {
 	size_t size;
 	size_t capacity;
 } header_t;
 
-int *array_init(size_t size)
+int *darr_init(size_t size)
 {
-	header_t *header = malloc(sizeof(header_t) + (sizeof(int)*size));
+	int capacity = size < DEF_ARR_CAPACITY ? DEF_ARR_CAPACITY : size;
+	header_t *header = malloc(sizeof(header_t) + (sizeof(int)*capacity));
 	header->size = 0;
-	header->capacity = size;
+	header->capacity = capacity;
 	return (int*)(header + 1);
 }
 
-size_t array_size(int *arr)
+size_t darr_size(int *arr)
 {
 	return ((header_t*)arr - 1)->size;
 }
 
-void arr_remove(int *arr, int var)
+void darr_remove(int *arr, int var)
 {
-	size_t size = array_size(arr);
+	size_t size = darr_size(arr);
 	for (size_t i = 0; i < size; ++i) {
 		if (arr[i] == var) {
 			arr[i] = arr[size - 1];
@@ -31,7 +34,7 @@ void arr_remove(int *arr, int var)
 	}
 }
 
-void arr_append(int *arr, int var)
+void darr_append(int *arr, int var)
 {
 	header_t *header = (header_t*)arr - 1;
 	if (header->capacity >= header->size + 1) {
@@ -45,7 +48,7 @@ void arr_append(int *arr, int var)
 	}
 }
 
-void arr_free(int *arr)
+void darr_free(int *arr)
 {
 	header_t *header = (header_t*)arr - 1;
 	free(header);
@@ -53,23 +56,23 @@ void arr_free(int *arr)
 
 int main(void)
 {
-	int *arr = array_init(0);
+	int *arr = darr_init(0);
 	for (size_t i = 0; i < 38; ++i) {
-		arr_append(arr, i);
+		darr_append(arr, i);
 	}
 
-	for (size_t i = 0; i < array_size(arr); ++i) {
+	for (size_t i = 0; i < darr_size(arr); ++i) {
 		printf("%d\t", arr[i]);
 	}
 	printf("\n");
 	
-	arr_remove(arr, 33);
+	darr_remove(arr, 33);
 
-	for (size_t i = 0; i < array_size(arr); ++i) {
+	for (size_t i = 0; i < darr_size(arr); ++i) {
 		printf("%d\t", arr[i]);
 	}
 
-	arr_free(arr);
+	darr_free(arr);
 
 	printf("\nDone!\n");
 	return 0;
