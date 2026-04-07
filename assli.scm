@@ -52,3 +52,5 @@
                 (else (write-char ch) (do-it port))))))))
 
 (do-it (current-input-port))
+
+;; vim: expandtab tabstop=2:
