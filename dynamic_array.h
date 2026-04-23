@@ -11,6 +11,8 @@ void darr_free(int *arr);
 
 #ifdef DYNAMIC_ARRAY_IMPLEMENTATION
 
+#include <stdlib.h>
+
 #define DEF_ARR_CAPACITY 16
 
 typedef struct {

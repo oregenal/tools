@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 #define DYNAMIC_ARRAY_IMPLEMENTATION
 #include "dynamic_array.h"
