@@ -1,13 +1,13 @@
 #ifndef DYNAMIC_ARRAY_
 #define DYNAMIC_ARRAY_
 
-#include <stddef.h>
-
 int *darr_init(size_t size);
 size_t darr_size(int *arr);
 void darr_remove(int *arr, int var);
 void darr_append(int *arr, int var);
 void darr_free(int *arr);
+
+#endif /* DYNAMIC_ARRAY_ */
 
 #ifdef DYNAMIC_ARRAY_IMPLEMENTATION
 
@@ -49,14 +49,12 @@ void darr_remove(int *arr, int var)
 void darr_append(int *arr, int var)
 {
 	header_t *header = (header_t*)arr - 1;
-	if (header->capacity > header->size) {
-		arr[header->size++] = var;
-	} else {
+	if (header->capacity <= header->size) {
 		header->capacity *= 2;
 		header = realloc(header, 
 				sizeof(header_t) + (sizeof(int) * header->capacity));
-		arr[header->size++] = var;
 	}
+	arr[header->size++] = var;
 }
 
 void darr_free(int *arr)
@@ -66,5 +64,3 @@ void darr_free(int *arr)
 }
 
 #endif /* DYNAMIC_ARRAY_IMPLEMENTATION */
-
-#endif /* DYNAMIC_ARRAY_ */
