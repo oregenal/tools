@@ -20,6 +20,14 @@ int main(void)
 	for (size_t i = 0; i < darr_size(arr); ++i) {
 		printf("%d\t", arr[i]);
 	}
+	printf("\n");
+
+	darr_append(arr, 33);
+
+	for (size_t i = 0; i < darr_size(arr); ++i) {
+		printf("%d\t", arr[i]);
+	}
+	printf("\n");
 
 	darr_free(arr);
 
